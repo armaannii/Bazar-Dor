@@ -1,11 +1,22 @@
 import { Iproduct } from '@/type/type';
 
-const ProductCard = ({ product }: {product: Iproduct}) => {
-  const { nameBn, image, today, change } = product;
+const ProductCard = ({ product }: { product: Iproduct }) => {
+  const { nameBn, image, unit, today, change } = product;
 
 
-  const formatPrice = (price: number) =>
-    new Intl.NumberFormat("bn-BD").format(price);
+const formatter = (value: number | string) => {
+  if (typeof value === "number") {
+    return new Intl.NumberFormat("bn-BD").format(value);
+  }
+  const units: Record<string, string> = {
+    kg: "কেজি",
+    litre: "লিটার",
+    piece: "পিস",
+    dozen: "ডজন"
+  };
+
+  return units[value] ?? value;
+};
 
   return (
     <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md">
@@ -22,7 +33,7 @@ const ProductCard = ({ product }: {product: Iproduct}) => {
             {nameBn}
           </h3>
           <p className="mt-0.5 text-xs text-gray-500">
-            প্রতি কেজি
+            প্রতি {formatter(unit)}
           </p>
         </div>
       </div>
@@ -33,7 +44,7 @@ const ProductCard = ({ product }: {product: Iproduct}) => {
           <p className="text-xs text-gray-500">আজকের দাম</p>
 
           <p className="mt-0.5 text-base font-bold text-gray-900">
-            ৳{formatPrice(today)}
+            ৳{formatter(today)}
             <span className="ml-1 text-xs font-normal text-gray-500">
               টাকা
             </span>
@@ -48,7 +59,7 @@ const ProductCard = ({ product }: {product: Iproduct}) => {
             change.dir == "up" ? <span> ▲ </span> : <span> ▼ </span>
           }
           <span>
-            {formatPrice(change.pct)}%
+            {formatter(change.pct)}%
           </span>
         </div>
       </div>

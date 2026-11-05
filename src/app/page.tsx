@@ -1,14 +1,13 @@
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import { Iproduct } from "@/type/type";
-import Image from "next/image";
 
 export default async function Home() {
   const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
   const data: Iproduct[] = await res.json();
   const priceUpData: Iproduct[] = data.filter((item: Iproduct) => item.change && item.change.dir === "up");
   const priceDownData: Iproduct[] = data.filter((item: Iproduct) => item.change && item.change.dir === "down");
-  console.log("down", priceDownData);
+  // console.log("down", priceDownData);
 
   const formatCount = (count: number) =>
     new Intl.NumberFormat("bn-BD").format(count);
@@ -24,7 +23,7 @@ export default async function Home() {
         </h2>
         <div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {priceUpData.map((product) => (
+            {priceUpData.slice(0, 6).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -37,24 +36,26 @@ export default async function Home() {
         </h2>
         <div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {priceDownData.map((product) => (
+            {priceDownData.slice(0, 6).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
-        
+
         {/* সব পণ্য*/}
-        <h2 className="mt-15 mb-4">
-          <p className="text-2xl font-bold"> সব পণ্য </p>
-          <p className="text-gray-400"> মোট {formatCount(data.length)} টি পণ্য দেখানো হচ্ছে </p>
-        </h2>
-        <div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {data.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+        <section id="সব-পণ্য">
+          <h2 className="mt-15 mb-4">
+            <p className="text-2xl font-bold"> সব পণ্য </p>
+            <p className="text-gray-400"> মোট {formatCount(data.length)} টি পণ্য দেখানো হচ্ছে </p>
+          </h2>
+          <div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {data.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
