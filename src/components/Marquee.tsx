@@ -1,3 +1,4 @@
+import { Iproduct } from "@/type/type";
 import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
@@ -15,8 +16,8 @@ interface Type {
 
 const Marquee = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
-    const resData: Type[] = await res.json();
-    console.log(resData)
+    const resData: Iproduct[] = await res.json();
+    // console.log(resData)
     return (
         <div className="py-2">
             <MarqueeText duration={12}>

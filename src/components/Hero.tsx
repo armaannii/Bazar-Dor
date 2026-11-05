@@ -6,7 +6,7 @@ const Hero = () => {
     });
 
     return (
-        <div className='bg-base-200 py-10'>
+        <div className='bg-base-200 pt-10'>
             <div className='flex items-center justify-between max-w-6xl mx-auto bg-white rounded-2xl px-4  border border-gray-200'>
                 <div>
                     <span className='text-green-700 bg-green-100 rounded-2xl px-2'> {date} </span>
