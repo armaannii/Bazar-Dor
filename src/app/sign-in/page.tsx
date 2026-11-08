@@ -35,12 +35,12 @@ export default function SignInPage() {
       const { data: resData, error } = await signIn.email({
         email: data.email,
         password: data.password,
-        callbackURL: "/dashboard",
+        callbackURL: "/",
       });
 
       if (resData) {
       toast.success("Sign In successfull!");
-      console.log(data);
+      // console.log(data);
     }
 
       if (error) {
@@ -48,7 +48,7 @@ export default function SignInPage() {
         return;
       }
 
-      console.log("Sign in successful:", resData);
+      // console.log("Sign in successful:", resData);
 
     } catch (error) {
       console.error("Something went wrong:", error);
@@ -134,15 +134,6 @@ export default function SignInPage() {
             <FieldError />
           </TextField>
 
-          {/* Forgot Password */}
-          <div className="w-full flex justify-end -mt-2">
-            <Link
-              href="/forgot-password"
-              className="text-xs text-[#078b40] hover:underline"
-            >
-              পাসওয়ার্ড ভুলে গেছেন?
-            </Link>
-          </div>
 
           {/* Sign In Button */}
           <Button

@@ -16,6 +16,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
   const [password, setPassword] = useState("");
@@ -48,14 +49,15 @@ export default function SignUpPage() {
         email: data.email,
         password: data.password,
       });
-      console.log("signUp", resData);
+      // console.log("signUp", resData);
       if (error) {
         console.error("Signup error:", error);
-        alert(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+        toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
         return;
       }
 
-      console.log("Signup successful:", resData);
+      toast.success("Signup successful!")
+      // console.log("Signup successful:", resData);
       // Redirect or show success message here
 
     } catch (error) {

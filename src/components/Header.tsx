@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { signOut, useSession } from '@/lib/auth-client';
 import { Button } from '@heroui/react';
 import { usePathname } from 'next/navigation';
+import ProfileDropdown from './ProfileDropdown';
+import { useState } from 'react';
 
 const Header = () => {
   const { data: session, isPending } = useSession();
@@ -18,22 +20,13 @@ const Header = () => {
   if (isPending) {
     return <div className="text-center py-8">
       <span className="loading loading-bars loading-lg"></span>
-      
+
     </div>
   }
 
+
   const button = <>{
-    session?.user ? <>
-      <button onClick={() => signOut()}
-          
-      >
-        <div className='flex items-center gap-2'>
-          <p> {session.user?.image} </p>
-          <p> {session.user.name} </p>
-          <span className="px-4 py-2 rounded-xl font-medium cursor-pointer bg-green-700 text-white  shadow-lg shadow-green-700/20"> সাইন আউট </span>
-        </div>
-      </button>
-    </> : <>
+    <div>
       <Link href="/sign-in">
         <button
           className={`px-4 py-2 rounded-xl font-medium cursor-pointer ${pathname === "/sign-in" ? "bg-green-700 text-white  shadow-lg shadow-green-700/20" : ""}`}
@@ -48,7 +41,7 @@ const Header = () => {
           সাইন আপ
         </button>
       </Link>
-    </>
+    </div>
   }</>
 
   return (
@@ -56,15 +49,24 @@ const Header = () => {
       <div className='max-w-6xl mx-auto flex justify-between'>
         <div className='flex gap-2'>
           <Link href={"/"}>
-              <Image src={"/logo-icon.png"} width={40} height={20} alt='logo' className='bg-green-500 rounded-lg p-1'></Image>
+            <Image src={"/logo-icon.png"} width={40} height={20} alt='logo' className='bg-green-500 rounded-lg p-1'></Image>
           </Link>
           <div>
             <h3 className='text-xl font-bold'> বাজার দর </h3>
             <span> {date} </span>
           </div>
         </div>
-        <div className='flex gap-3'>
-          {button}
+
+        <div className=''>
+          {
+            session?.user ? (
+              <div>
+                <ProfileDropdown user={session}></ProfileDropdown>
+              </div>
+            ) : (
+              button
+            )
+          }
         </div>
       </div>
 
