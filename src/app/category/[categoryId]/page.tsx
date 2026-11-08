@@ -10,29 +10,7 @@ const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
     const data: Iproduct[] = await res.json();
     // console.log(data);
     const category = data[0];
-    console.log(category)
-
-    // const [data, setData] = useState<Iproduct[] | null>(null);
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         try {
-    //             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?category=${categoryId}`);
-    //             if (!res.ok) throw new Error('Failed to fetch data');
-    //             const result: Iproduct[] = await res.json();
-    //             // set state...
-    //             setData(result)
-    //         } catch (error) {
-    //             console.error('Fetch error:', error);
-    //         }
-    //     }
-    //     fetchData();
-    // }, []);
-    // if (!data || data.length === 0) {
-    //     return <div className="text-center py-8">
-    //         <span className="loading loading-bars loading-lg"></span>;
-    //     </div>
-    // }
-    // const category = data[0];
+    // console.log(category)
 
 
 
@@ -53,15 +31,6 @@ const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
                 <div>
                     <SortBy data={data}></SortBy>
                 </div>
-
-                
-                {/* <div className="grid grid-cols-3 gap-4 pb-15">
-                    {
-                        data && data.map(product => <div key={product.id}>
-                            <ProductCard product={product}></ProductCard>
-                        </div>)
-                    }
-                </div>  */}
             </div>
         </div>
     )

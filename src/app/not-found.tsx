@@ -37,7 +37,7 @@ const NotFound = () => {
                                active:translate-y-0
                                transition-all duration-300 ease-out"
                 >
-                    ← Back to Home
+                    ← হোম পেজে ফিরে যান
                 </Link>
             </div>
         </div>

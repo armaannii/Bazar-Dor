@@ -15,7 +15,7 @@ interface IUser {
     image?: string | null;
 }
 
-const ProfileDropdown = ({ user }) => {
+const ProfileDropdown = ({ user }: {user: IUser}) => {
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
 
@@ -44,8 +44,8 @@ const ProfileDropdown = ({ user }) => {
             >
                 {user.image ? (
                     <img
-                        src={user.user.image}
-                        alt={user.user.name}
+                        src={user.image}
+                        alt={user.name}
                         className="w-8 h-8 rounded-full object-cover"
                     />
                 ) : (
@@ -55,7 +55,7 @@ const ProfileDropdown = ({ user }) => {
                 )}
 
                 <span className="text-sm font-medium">
-                    {user.user.name}
+                    {user.name}
                 </span>
             </button>
 
@@ -72,11 +72,11 @@ const ProfileDropdown = ({ user }) => {
                         {/* User Info */}
                         <div className="border-b border-gray-200 pb-4">
                             <h3 className="font-semibold text-gray-800">
-                                {user.user.name}
+                                {user.name}
                             </h3>
 
                             <p className="text-xs text-gray-500 mt-1">
-                                {user.user.email}
+                                {user.email}
                             </p>
                         </div>
 

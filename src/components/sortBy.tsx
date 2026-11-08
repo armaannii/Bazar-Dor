@@ -4,6 +4,7 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 import { Iproduct } from "@/type/type";
+import { ArrowLeft, Link } from "lucide-react";
 
 const SortBy = ({ data }: { data: Iproduct[] }) => {
     const [sortBy, setSortBy] = useState("default");
@@ -49,11 +50,21 @@ const SortBy = ({ data }: { data: Iproduct[] }) => {
 
             <p className="mt-6 mb-3"> মোট {data && formatCount(data.length)}টি পণ্য দেখানো হচ্ছে </p>
             <div className="grid grid-cols-3 gap-4 pb-15">
-                {sortedData.map((product) => (
+                {sortedData.length > 0 ? sortedData.map((product) => (
                     <div key={product.id}>
                         <ProductCard product={product} />
                     </div>
-                ))}
+                )) : <div className="mx-auto py-15">
+                    <p className="text-2xl">Product card not found</p>
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2 mt-5 bg-green-700 text-white font-bold px-4 py-3"
+                    >
+                        <ArrowLeft size={14} />
+                        হোম পেজে ফিরে যান
+                    </Link>
+                </div>
+                }
             </div>
         </div>
     );

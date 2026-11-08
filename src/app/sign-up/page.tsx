@@ -42,16 +42,17 @@ export default function SignUpPage() {
       const data = Object.fromEntries(
         formData.entries()
       ) as Record<string, string>;
-      console.log("data from the form", data);
+      // console.log("data from the form", data);
 
       const { data: resData, error } = await signUp.email({
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: "/",
       });
       // console.log("signUp", resData);
       if (error) {
-        console.error("Signup error:", error);
+        // console.error("Signup error:", error);
         toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
         return;
       }
@@ -70,12 +71,14 @@ export default function SignUpPage() {
   const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
       provider: "google",
+      callbackURL: "/"
     });
   };
 
   const handleGithubSignIn = async () => {
     await authClient.signIn.social({
       provider: "github",
+      callbackURL: "/",
     });
   }
 

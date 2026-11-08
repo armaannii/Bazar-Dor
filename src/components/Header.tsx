@@ -61,7 +61,7 @@ const Header = () => {
           {
             session?.user ? (
               <div>
-                <ProfileDropdown user={session}></ProfileDropdown>
+                <ProfileDropdown user={session?.user}></ProfileDropdown>
               </div>
             ) : (
               button
