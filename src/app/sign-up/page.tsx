@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -83,21 +82,21 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f0f5f0] flex flex-col items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-[#f0f5f0] flex flex-col items-center justify-center px-3 py-6 sm:px-6 sm:py-10">
 
       {/* Heading */}
-      <div className="text-center mb-5">
-        <h1 className="text-2xl font-bold text-[#25352c]">
+      <div className="text-center mb-5 px-2">
+        <h1 className="text-xl sm:text-2xl font-bold text-[#25352c]">
           অ্যাকাউন্ট তৈরি করুন
         </h1>
 
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs sm:text-sm text-gray-500 mt-1">
           নিরাপদ যাত্রা শুরু করতে নতুন অ্যাকাউন্ট খুলুন
         </p>
       </div>
 
       {/* Signup Card */}
-      <div className="w-full max-w-md bg-white/70 border border-gray-200 rounded-xl p-6">
+      <div className="w-full max-w-md bg-white/70 border border-gray-200 rounded-xl p-4 sm:p-6">
 
         <Form
           className="flex flex-col gap-4"
@@ -124,7 +123,7 @@ export default function SignUpPage() {
             type="email"
             validate={(value) => {
               if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+                !/^[A-Z0-9.\_%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
               ) {
                 return "সঠিক ইমেইল ঠিকানা লিখুন";
               }
@@ -214,11 +213,11 @@ export default function SignUpPage() {
           </div>
 
           {/* Social Signup */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
             <Button
               type="button"
-              //   variant="bordered"
+              // variant="bordered"
               className="w-full text-xs bg-white text-black border border-gray-200"
               onClick={handleGoogleSignIn}
             >
@@ -230,7 +229,7 @@ export default function SignUpPage() {
 
             <Button
               type="button"
-              //   variant="bordered"
+              // variant="bordered"
               className="w-full text-xs bg-white text-black border border-gray-200"
               onClick={handleGithubSignIn}
             >

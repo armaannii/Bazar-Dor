@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -37,7 +36,7 @@ const Navlinks = () => {
     }, []);
 
     return (
-        <div className="flex gap-8 overflow-x-auto py-4">
+        <div className="flex gap-2 sm:gap-4 lg:gap-8 overflow-x-auto py-3 sm:py-4 px-1 whitespace-nowrap scrollbar-thin">
             {data && data.map((category) => {
                 const isActive =
                     pathname === `/category/${category.slug}`;
@@ -46,7 +45,7 @@ const Navlinks = () => {
                     <Link
                         key={category.id}
                         href={`/category/${category.slug}`}
-                        className={`shrink-0 rounded-lg px-3 py-2 transition-colors ${isActive
+                        className={`shrink-0 rounded-lg px-2 sm:px-3 py-2 text-sm sm:text-base transition-colors ${isActive
                             ? "bg-green-700 text-white"
                             : " text-black hover:bg-green-100"
                             }`}
@@ -60,7 +59,3 @@ const Navlinks = () => {
 };
 
 export default Navlinks;
-
-
-
-

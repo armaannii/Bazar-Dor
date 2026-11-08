@@ -22,20 +22,20 @@ const ProductCard = ({ product }: { product: Iproduct }) => {
 
   return (
     <Link href={`/product-details/${product.id}`}>
-      <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md">
+      <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-3 sm:p-4 shadow-sm transition-all duration-200 hover:shadow-md">
         {/* Product Information */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Product Image */}
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-100">
+          <div className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-100">
             {image}
           </div>
 
           {/* Product Name & Unit */}
           <div className="min-w-0 flex-1">
-            <h3 className="truncate text-sm font-semibold text-gray-800">
+            <h3 className="truncate text-sm sm:text-base font-semibold text-gray-800">
               {nameBn}
             </h3>
-            <p className="mt-0.5 text-xs text-gray-500">
+            <p className="mt-0.5 text-xs sm:text-sm text-gray-500">
               প্রতি {formatter(unit)}
             </p>
           </div>
@@ -43,10 +43,10 @@ const ProductCard = ({ product }: { product: Iproduct }) => {
 
         {/* Price Information */}
         <div className="mt-3 flex items-end justify-between gap-2">
-          <div>
-            <p className="text-xs text-gray-500">আজকের দাম</p>
+          <div className="min-w-0">
+            <p className="text-xs sm:text-sm text-gray-500">আজকের দাম</p>
 
-            <p className="mt-0.5 text-base font-bold text-gray-900">
+            <p className="mt-0.5 text-sm sm:text-base lg:text-lg font-bold text-gray-900">
               ৳{formatter(today)}
               <span className="ml-1 text-xs font-normal text-gray-500">
                 টাকা
@@ -56,7 +56,7 @@ const ProductCard = ({ product }: { product: Iproduct }) => {
 
           {/* Price Change */}
           <div
-            className={`flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[12px] font-semibold rounded-xl px-2 ${change.dir == "up" ? "text-red-600 bg-red-50" : "text-green-600 bg-green-100"}`}
+            className={`flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[11px] sm:text-[12px] font-semibold rounded-xl px-2 ${change.dir == "up" ? "text-red-600 bg-red-50" : "text-green-600 bg-green-100"}`}
           >
             {
               change.dir == "up" ? <span> ▲ </span> : <span> ▼ </span>

@@ -29,18 +29,18 @@ const Marquee = () => {
 
     // 1. If it's still loading or data is empty, don't render the marquee package yet
     if (loading || !data || data.length === 0) {
-        return <div className="py-2 text-center text-gray-400 text-sm">Loading market prices...</div>;
+        return <div className="py-2 text-center text-gray-400 text-xs sm:text-sm">Loading market prices...</div>;
     }
 
     return (
-        <div className="py-2 overflow-hidden">
+        <div className="py-2 sm:py-3 overflow-hidden text-xs sm:text-sm lg:text-base">
             <MarqueeText duration={12}>
                 {data.map((product) => (
-                    <div key={product.id} className="flex items-center gap-2 pr-8">
+                    <div key={product.id} className="flex items-center gap-1.5 sm:gap-2 pr-5 sm:pr-8 whitespace-nowrap">
                         <span>{product.image}</span>
                         <span className="font-medium">{product.nameBn}</span>
                         <span>{`${product.today} টাকা/কেজি`}</span>
-                        
+
                         {product.change?.dir === "up" ? (
                             <div className="flex items-center gap-1 text-red-500">
                                 <TbTriangleFilled /> {product.change.pct} %

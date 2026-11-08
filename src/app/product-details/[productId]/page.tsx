@@ -1,4 +1,3 @@
-
 import { Iproduct } from "@/type/type";
 import { notFound } from "next/navigation";
 
@@ -88,24 +87,24 @@ const ProductDetailPage = async ({
   ];
 
   return (
-    <main className="min-h-screen bg-[#f1f6f1] px-3 py-6 sm:px-6 lg:px-10">
-      <div className="mx-auto max-w-7xl space-y-5">
+    <main className="min-h-screen bg-[#f1f6f1] px-3 py-4 sm:px-6 sm:py-6 lg:px-10">
+      <div className="mx-auto max-w-7xl space-y-4 sm:space-y-5">
 
         {/* Product Header */}
-        <section className="rounded-xl border border-[#e5ece5] bg-white p-4 sm:p-5">
-          <div className="flex items-center justify-between gap-3">
+        <section className="rounded-xl border border-[#e5ece5] bg-white p-3 sm:p-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
 
             <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-              <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-[#f1f6f1] text-3xl sm:size-16">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#f1f6f1] text-2xl sm:size-16 sm:text-3xl">
                 {data.image || data.categoryIcon}
               </div>
 
               <div className="min-w-0">
-                <h1 className="text-xl font-bold text-[#25332a] sm:text-2xl">
+                <h1 className="break-words text-lg font-bold text-[#25332a] sm:text-2xl">
                   {data.nameBn}
                 </h1>
 
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-xs text-gray-500 sm:text-sm">
                   প্রতি {unitLabel} · {data.categoryNameBn}
                 </p>
 
@@ -121,7 +120,7 @@ const ProductDetailPage = async ({
             </div>
 
             {/* Current Price */}
-            <div className="shrink-0 rounded-xl bg-[#f1f6f1] px-3 py-3 text-center sm:px-5">
+            <div className="w-full shrink-0 rounded-xl bg-[#f1f6f1] px-3 py-3 text-center sm:w-auto sm:px-5">
               <p className="text-[10px] text-gray-500 sm:text-xs">
                 আজকের বাজার দর
               </p>
@@ -144,16 +143,16 @@ const ProductDetailPage = async ({
         </section>
 
         {/* Price Summary */}
-        <section className="rounded-xl border border-[#e5ece5] bg-white p-4 sm:p-5">
+        <section className="rounded-xl border border-[#e5ece5] bg-white p-3 sm:p-5">
           <h2 className="mb-4 text-base font-semibold text-[#25332a]">
             দামের সারসংক্ষেপ
           </h2>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {summaryCards.map((card) => (
               <div
                 key={card.title}
-                className="rounded-xl border border-[#e7eee7] bg-[#fbfdfb] p-4"
+                className="rounded-xl border border-[#e7eee7] bg-[#fbfdfb] p-3 sm:p-4"
               >
                 <p className="text-xs font-medium text-gray-600">
                   {card.title}
@@ -172,33 +171,33 @@ const ProductDetailPage = async ({
         </section>
 
         {/* Market Price Comparison */}
-        <section className="rounded-xl border border-[#e5ece5] bg-white p-4 sm:p-5">
+        <section className="rounded-xl border border-[#e5ece5] bg-white p-3 sm:p-5">
           <h2 className="mb-4 text-base font-semibold text-[#25332a]">
             বাজারভিত্তিক আজকের দাম
           </h2>
 
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[600px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[600px] border-collapse text-left text-xs sm:text-sm">
 
               <thead>
                 <tr className="border-b border-[#e7eee7] text-xs text-gray-500">
-                  <th className="px-3 py-3 font-medium">
+                  <th className="whitespace-nowrap px-3 py-3 font-medium">
                     বাজার
                   </th>
 
-                  <th className="px-3 py-3 font-medium">
+                  <th className="whitespace-nowrap px-3 py-3 font-medium">
                     বিভাগ
                   </th>
 
-                  <th className="px-3 py-3 text-right font-medium">
+                  <th className="whitespace-nowrap px-3 py-3 text-right font-medium">
                     সর্বনিম্ন
                   </th>
 
-                  <th className="px-3 py-3 text-right font-medium">
+                  <th className="whitespace-nowrap px-3 py-3 text-right font-medium">
                     সর্বোচ্চ
                   </th>
 
-                  <th className="px-3 py-3 text-right font-medium">
+                  <th className="whitespace-nowrap px-3 py-3 text-right font-medium">
                     গড়
                   </th>
                 </tr>
@@ -218,23 +217,23 @@ const ProductDetailPage = async ({
                           : "bg-[#f1f6f1]"
                       }`}
                     >
-                      <td className="px-3 py-3 font-medium text-[#344338]">
+                      <td className="whitespace-nowrap px-3 py-3 font-medium text-[#344338]">
                         {market.market}
                       </td>
 
-                      <td className="px-3 py-3 text-gray-600">
+                      <td className="whitespace-nowrap px-3 py-3 text-gray-600">
                         {market.division}
                       </td>
 
-                      <td className="px-3 py-3 text-right text-gray-700">
+                      <td className="whitespace-nowrap px-3 py-3 text-right text-gray-700">
                         {formatPrice(market.min)}
                       </td>
 
-                      <td className="px-3 py-3 text-right text-gray-700">
+                      <td className="whitespace-nowrap px-3 py-3 text-right text-gray-700">
                         {formatPrice(market.max)}
                       </td>
 
-                      <td className="px-3 py-3 text-right font-semibold text-[#344338]">
+                      <td className="whitespace-nowrap px-3 py-3 text-right font-semibold text-[#344338]">
                         {formatPrice(marketAverage)}
                       </td>
                     </tr>

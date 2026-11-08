@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -10,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
     const { data: session, isPending } = authClient.useSession();
-    
+
     const router = useRouter();
 
     const [name, setName] = useState("");
@@ -51,7 +50,7 @@ const ProfilePage = () => {
 
     if (!user) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="min-h-screen flex items-center justify-center px-4 text-center">
                 Please login to view your profile.
             </div>
         );
@@ -69,7 +68,7 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#f0f5f0] py-10 px-4">
+        <div className="min-h-screen bg-[#f0f5f0] py-6 px-3 sm:py-8 sm:px-5 lg:py-10 lg:px-4">
             <div className="max-w-3xl mx-auto">
 
                 {/* Page Heading */}
@@ -84,28 +83,28 @@ const ProfilePage = () => {
                 </div>
 
                 {/* User Profile Card */}
-                <div className="bg-white/70 border border-gray-200 rounded-xl p-4 md:p-5 flex items-center justify-between gap-3 mb-4">
+                <div className="bg-white/70 border border-gray-200 rounded-xl p-3 sm:p-4 md:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
 
                         {user.image ? (
                             <img
                                 src={user.image}
                                 alt={user.name}
-                                className="w-12 h-12 rounded-xl object-cover"
+                                className="w-12 h-12 rounded-xl object-cover shrink-0"
                             />
                         ) : (
-                            <div className="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center shrink-0">
                                 <UserRound size={25} />
                             </div>
                         )}
 
-                        <div>
-                            <h3 className="font-semibold text-gray-800">
+                        <div className="min-w-0">
+                            <h3 className="font-semibold text-gray-800 break-words">
                                 {user.name}
                             </h3>
 
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 mt-1 break-all">
                                 {user.email}
                             </p>
                         </div>
@@ -114,7 +113,7 @@ const ProfilePage = () => {
 
                     <button
                         onClick={handleSignOut}
-                        className="flex items-center gap-1.5 text-xs text-red-500 border border-red-400 rounded-lg px-3 py-2 hover:bg-red-50 transition cursor-pointer"
+                        className="flex items-center justify-center gap-1.5 text-xs text-red-500 border border-red-400 rounded-lg px-3 py-2 hover:bg-red-50 transition cursor-pointer w-full sm:w-auto shrink-0"
                     >
                         <LogOut size={14} />
                         সাইন আউট
@@ -123,7 +122,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Update Information Card */}
-                <div className="bg-white/70 border border-gray-200 rounded-xl p-4 md:p-5">
+                <div className="bg-white/70 border border-gray-200 rounded-xl p-3 sm:p-4 md:p-5">
 
                     <h3 className="font-semibold text-gray-800 mb-6">
                         তথ্য
@@ -131,7 +130,7 @@ const ProfilePage = () => {
 
                     <form
                         onSubmit={handleUpdate}
-                        className="px-2 md:px-3"
+                        className="px-1 sm:px-2 md:px-3"
                     >
 
                         <label

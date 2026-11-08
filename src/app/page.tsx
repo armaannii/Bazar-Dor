@@ -15,11 +15,11 @@ export default async function Home() {
   return (
     <div className="bg-base-200">
       <Hero></Hero>
-      <div className="max-w-6xl mx-auto py-15">
+      <div className="max-w-6xl mx-auto px-3 py-8 sm:px-5 sm:py-10 lg:px-0 lg:py-15">
         {/* আজ দাম বেড়েছে */}
         <h2 className="mb-4">
           <span className="text-red-600"> ▲ </span>
-          <span className="text-2xl font-bold"> আজ দাম বেড়েছে </span>
+          <span className="text-xl sm:text-2xl font-bold"> আজ দাম বেড়েছে </span>
         </h2>
         <div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -30,9 +30,9 @@ export default async function Home() {
         </div>
 
         {/* আজ দাম কমেছে */}
-        <h2 className="mt-15 mb-4">
+        <h2 className="mt-10 sm:mt-12 lg:mt-15 mb-4">
           <span className="text-green-600"> ▼ </span>
-          <span className="text-2xl font-bold"> আজ দাম কমেছে </span>
+          <span className="text-xl sm:text-2xl font-bold"> আজ দাম কমেছে </span>
         </h2>
         <div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -44,9 +44,9 @@ export default async function Home() {
 
         {/* সব পণ্য*/}
         <section id="সব-পণ্য">
-          <h2 className="mt-15 mb-4">
-            <p className="text-2xl font-bold"> সব পণ্য </p>
-            <p className="text-gray-400"> মোট {formatCount(data.length)} টি পণ্য দেখানো হচ্ছে </p>
+          <h2 className="mt-10 sm:mt-12 lg:mt-15 mb-4">
+            <p className="text-xl sm:text-2xl font-bold"> সব পণ্য </p>
+            <p className="text-sm sm:text-base text-gray-400"> মোট {formatCount(data.length)} টি পণ্য দেখানো হচ্ছে </p>
           </h2>
           <div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

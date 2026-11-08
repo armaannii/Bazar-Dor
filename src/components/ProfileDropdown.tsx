@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -40,21 +39,21 @@ const ProfileDropdown = ({ user }: {user: IUser}) => {
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 cursor-pointer"
+                className="flex items-center gap-1.5 sm:gap-2 cursor-pointer max-w-full"
             >
                 {user.image ? (
                     <img
                         src={user.image}
                         alt={user.name}
-                        className="w-8 h-8 rounded-full object-cover"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover shrink-0"
                     />
                 ) : (
-                    <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
                         <UserRound size={18} />
                     </div>
                 )}
 
-                <span className="text-sm font-medium">
+                <span className="text-xs sm:text-sm font-medium max-w-24 sm:max-w-40 truncate">
                     {user.name}
                 </span>
             </button>
@@ -67,15 +66,15 @@ const ProfileDropdown = ({ user }: {user: IUser}) => {
                         onClick={() => setIsOpen(false)}
                     />
 
-                    <div className="absolute right-0 top-full mt-3 z-50 w-72 rounded-2xl border border-gray-200 bg-white p-4 shadow-lg">
+                    <div className="absolute right-0 top-full mt-2 sm:mt-3 z-50 w-64 sm:w-72 max-w-[calc(100vw-1.5rem)] rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 shadow-lg">
 
                         {/* User Info */}
-                        <div className="border-b border-gray-200 pb-4">
-                            <h3 className="font-semibold text-gray-800">
+                        <div className="border-b border-gray-200 pb-3 sm:pb-4">
+                            <h3 className="font-semibold text-sm sm:text-base text-gray-800 truncate">
                                 {user.name}
                             </h3>
 
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 mt-1 break-all">
                                 {user.email}
                             </p>
                         </div>
