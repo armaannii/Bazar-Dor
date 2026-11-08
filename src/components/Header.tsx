@@ -18,7 +18,6 @@ const Header = () => {
   if (isPending) {
     return <div className="text-center py-8">
       <span className="loading loading-bars loading-lg"></span>
-      <span className="loading loading-bars loading-lg"></span>
       
     </div>
   }
