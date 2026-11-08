@@ -14,5 +14,13 @@ export interface Iproduct {
     "change": {
       "dir": string, //up | down | flat
       "pct": number // parcanteg like 2.4
-    }
+    },
+    "markets": Market[];
+}
+
+export interface Market {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
 }

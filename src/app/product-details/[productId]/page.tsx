@@ -1,32 +1,7 @@
 
+import { Iproduct } from "@/type/type";
 import { notFound } from "next/navigation";
 
-interface Market {
-  market: string;
-  division: string;
-  min: number;
-  max: number;
-}
-
-interface Product {
-  id: number;
-  slug: string;
-  nameBn: string;
-  category: string;
-  categoryNameBn: string;
-  categoryIcon: string;
-  unit: string;
-  image: string;
-  today: number;
-  yesterday: number;
-  lastWeek: number;
-  lastMonth: number;
-  change: {
-    dir: "up" | "down" | "same";
-    pct: number;
-  };
-  markets: Market[];
-}
 
 const numberFormat = new Intl.NumberFormat("bn-BD", {
   maximumFractionDigits: 1,
@@ -52,7 +27,7 @@ const ProductDetailPage = async ({
     notFound();
   }
 
-  const data: Product = await res.json();
+  const data: Iproduct = await res.json();
 
   const markets = data.markets ?? [];
 
