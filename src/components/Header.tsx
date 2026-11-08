@@ -1,24 +1,71 @@
+"use client"
 import Image from 'next/image'
 import Navlinks from './Navlinks';
 import Marquee from './Marquee';
+import Link from 'next/link';
+import { signOut, useSession } from '@/lib/auth-client';
+import { Button } from '@heroui/react';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
+  const { data: session, isPending } = useSession();
+  const pathname = usePathname()
+
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
+
+  if (isPending) {
+    return <div className="text-center py-8">
+      <span className="loading loading-bars loading-lg"></span>
+      <span className="loading loading-bars loading-lg"></span>
+      
+    </div>
+  }
+
+  const button = <>{
+    session?.user ? <>
+      <button onClick={() => signOut()}
+          
+      >
+        <div className='flex items-center gap-2'>
+          <p> {session.user?.image} </p>
+          <p> {session.user.name} </p>
+          <span className="px-4 py-2 rounded-xl font-medium cursor-pointer bg-green-700 text-white  shadow-lg shadow-green-700/20"> সাইন আউট </span>
+        </div>
+      </button>
+    </> : <>
+      <Link href="/sign-in">
+        <button
+          className={`px-4 py-2 rounded-xl font-medium cursor-pointer ${pathname === "/sign-in" ? "bg-green-700 text-white  shadow-lg shadow-green-700/20" : ""}`}
+        >
+          সাইন ইন
+        </button>
+      </Link>
+      <Link href="/sign-up">
+        <button
+          className={`px-4 py-2 rounded-xl font-medium cursor-pointer ${pathname === "/sign-up" ? "bg-green-700 text-white shadow-lg shadow-green-700/20" : ""}`}
+        >
+          সাইন আপ
+        </button>
+      </Link>
+    </>
+  }</>
+
   return (
     <div className='py-4 bg-base-200'>
       <div className='max-w-6xl mx-auto flex justify-between'>
         <div className='flex gap-2'>
-          <Image src={"/logo-icon.png"} width={40} height={20} alt='logo' className='bg-green-500 rounded-lg p-1'></Image>
+          <Link href={"/"}>
+              <Image src={"/logo-icon.png"} width={40} height={20} alt='logo' className='bg-green-500 rounded-lg p-1'></Image>
+          </Link>
           <div>
             <h3 className='text-xl font-bold'> বাজার দর </h3>
             <span> {date} </span>
           </div>
         </div>
         <div className='flex gap-3'>
-          <button className='btn'>সাইন ইন</button>
-          <button className='btn'>সাইন আপ</button>
+          {button}
         </div>
       </div>
 

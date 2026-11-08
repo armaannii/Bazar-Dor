@@ -3,9 +3,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { signIn } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 import { Github } from "lucide-brands";
 import { ArrowLeft } from "lucide-react";
+import toast from "react-hot-toast";
 
 import {
   Button,
@@ -13,7 +14,7 @@ import {
   Form,
   Input,
   Label,
-  TextField,
+  TextField
 } from "@heroui/react";
 
 export default function SignInPage() {
@@ -37,9 +38,13 @@ export default function SignInPage() {
         callbackURL: "/dashboard",
       });
 
+      if (resData) {
+      toast.success("Sign In successfull!");
+      console.log(data);
+    }
+
       if (error) {
-        console.error("Sign in error:", error);
-        alert(error.message || "সাইন ইন করা যায়নি");
+        toast.error(error.message || "সাইন ইন করা যায়নি");
         return;
       }
 
@@ -51,6 +56,20 @@ export default function SignInPage() {
       setIsLoading(false);
     }
   };
+
+  
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+
+  };
+
+  const handleGithubSignIn = async () => {
+ await authClient.signIn.social({
+      provider: "github",
+    });
+  }
 
   return (
     <div className="min-h-screen bg-[#f0f5f0] flex flex-col items-center justify-center px-4 py-10">
@@ -152,15 +171,10 @@ export default function SignInPage() {
             <Button
               type="button"
             //   variant="bordered"
-              className="w-full text-xs"
-              onPress={() =>
-                signIn.social({
-                  provider: "google",
-                  callbackURL: "/dashboard",
-                })
-              }
+              className="w-full text-xs bg-white text-black border border-gray-200"
+              onClick={handleGoogleSignIn}
             >
-              <span className="font-bold text-base text-blue-500">
+              <span className="font-bold">
                 G
               </span>
 
@@ -171,13 +185,8 @@ export default function SignInPage() {
             <Button
               type="button"
             //   variant="bordered"
-              className="w-full text-xs"
-              onPress={() =>
-                signIn.social({
-                  provider: "github",
-                  callbackURL: "/dashboard",
-                })
-              }
+              className="w-full text-xs bg-white text-black border border-gray-200"
+              onClick={handleGithubSignIn}
             >
               <Github size={17} />
 

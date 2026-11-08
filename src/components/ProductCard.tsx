@@ -1,69 +1,73 @@
 import { Iproduct } from '@/type/type';
+import Link from 'next/link';
 
 const ProductCard = ({ product }: { product: Iproduct }) => {
   const { nameBn, image, unit, today, change } = product;
 
+  // console.log("product", product)
 
-const formatter = (value: number | string) => {
-  if (typeof value === "number") {
-    return new Intl.NumberFormat("bn-BD").format(value);
-  }
-  const units: Record<string, string> = {
-    kg: "কেজি",
-    litre: "লিটার",
-    piece: "পিস",
-    dozen: "ডজন"
+  const formatter = (value: number | string) => {
+    if (typeof value === "number") {
+      return new Intl.NumberFormat("bn-BD").format(value);
+    }
+    const units: Record<string, string> = {
+      kg: "কেজি",
+      litre: "লিটার",
+      piece: "পিস",
+      dozen: "ডজন"
+    };
+
+    return units[value] ?? value;
   };
 
-  return units[value] ?? value;
-};
-
   return (
-    <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md">
-      {/* Product Information */}
-      <div className="flex items-center gap-3">
-        {/* Product Image */}
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-100">
-          {image}
+    <Link href={`/product-details/${product.id}`}>
+      <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md">
+        {/* Product Information */}
+        <div className="flex items-center gap-3">
+          {/* Product Image */}
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-100">
+            {image}
+          </div>
+
+          {/* Product Name & Unit */}
+          <div className="min-w-0 flex-1">
+            <h3 className="truncate text-sm font-semibold text-gray-800">
+              {nameBn}
+            </h3>
+            <p className="mt-0.5 text-xs text-gray-500">
+              প্রতি {formatter(unit)}
+            </p>
+          </div>
         </div>
 
-        {/* Product Name & Unit */}
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm font-semibold text-gray-800">
-            {nameBn}
-          </h3>
-          <p className="mt-0.5 text-xs text-gray-500">
-            প্রতি {formatter(unit)}
-          </p>
-        </div>
-      </div>
+        {/* Price Information */}
+        <div className="mt-3 flex items-end justify-between gap-2">
+          <div>
+            <p className="text-xs text-gray-500">আজকের দাম</p>
 
-      {/* Price Information */}
-      <div className="mt-3 flex items-end justify-between gap-2">
-        <div>
-          <p className="text-xs text-gray-500">আজকের দাম</p>
+            <p className="mt-0.5 text-base font-bold text-gray-900">
+              ৳{formatter(today)}
+              <span className="ml-1 text-xs font-normal text-gray-500">
+                টাকা
+              </span>
+            </p>
+          </div>
 
-          <p className="mt-0.5 text-base font-bold text-gray-900">
-            ৳{formatter(today)}
-            <span className="ml-1 text-xs font-normal text-gray-500">
-              টাকা
+          {/* Price Change */}
+          <div
+            className={`flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[12px] font-semibold rounded-xl px-2 ${change.dir == "up" ? "text-red-600 bg-red-50" : "text-green-600 bg-green-100"}`}
+          >
+            {
+              change.dir == "up" ? <span> ▲ </span> : <span> ▼ </span>
+            }
+            <span>
+              {formatter(change.pct)}%
             </span>
-          </p>
-        </div>
-
-        {/* Price Change */}
-        <div
-          className={`flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[12px] font-semibold rounded-xl px-2 ${change.dir == "up" ? "text-red-600 bg-red-50" : "text-green-600 bg-green-100"}`}
-        >
-          {
-            change.dir == "up" ? <span> ▲ </span> : <span> ▼ </span>
-          }
-          <span>
-            {formatter(change.pct)}%
-          </span>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

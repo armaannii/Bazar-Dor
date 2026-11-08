@@ -1,28 +1,66 @@
-import Link from 'next/link';
-import React from 'react'
+
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Icategory {
-    id: string,
-    icon: string,
-    nameBn: string,
-    slug: string,
+    id: string;
+    icon: string;
+    nameBn: string;
+    slug: string;
 }
 
-const Navlinks = async () => {
-    const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
-    const data: Icategory[] = await res.json();
-    // console.log("data", data)
-    
+const Navlinks = () => {
+    const pathname = usePathname();
+
+
+    // const res = await fetch(`${process.env.PUBLIC_API_URL}/categories`);
+    // const data: Icategory[] = await res.json();
+    // console.log("first", data)
+
+    const [data, setData] = useState<Icategory[] | null>(null);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
+                if (!res.ok) throw new Error('Failed to fetch data');
+                const result: Icategory[] = await res.json();
+                // set state...
+                setData(result)
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
-    <div className='flex gap-8 py-4'>
-        {
-            data.map(category => <Link key={category.id} href={`/category/${category.slug}`}>
-                {category.icon} {category.nameBn}
-            </Link>)
-        }
-    </div>
-  )
-}
+        <div className="flex gap-8 overflow-x-auto py-4">
+            {data && data.map((category) => {
+                const isActive =
+                    pathname === `/category/${category.slug}`;
 
-export default Navlinks
+                return (
+                    <Link
+                        key={category.id}
+                        href={`/category/${category.slug}`}
+                        className={`shrink-0 rounded-lg px-3 py-2 transition-colors ${isActive
+                            ? "bg-green-700 text-white"
+                            : " text-black hover:bg-green-100"
+                            }`}
+                    >
+                        {category.icon} {category.nameBn}
+                    </Link>
+                );
+            })}
+        </div>
+    );
+};
+
+export default Navlinks;
+
+
+
+

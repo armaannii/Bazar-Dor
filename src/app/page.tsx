@@ -3,7 +3,7 @@ import ProductCard from "@/components/ProductCard";
 import { Iproduct } from "@/type/type";
 
 export default async function Home() {
-  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
   const data: Iproduct[] = await res.json();
   const priceUpData: Iproduct[] = data.filter((item: Iproduct) => item.change && item.change.dir === "up");
   const priceDownData: Iproduct[] = data.filter((item: Iproduct) => item.change && item.change.dir === "down");

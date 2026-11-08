@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { signUp } from "@/lib/auth-client";
+import { authClient, signUp } from "@/lib/auth-client";
 import { Github } from "lucide-brands";
 import { ArrowLeft } from "lucide-react";
 
@@ -41,13 +41,14 @@ export default function SignUpPage() {
       const data = Object.fromEntries(
         formData.entries()
       ) as Record<string, string>;
+      console.log("data from the form", data);
 
       const { data: resData, error } = await signUp.email({
         name: data.name,
         email: data.email,
         password: data.password,
       });
-
+      console.log("signUp", resData);
       if (error) {
         console.error("Signup error:", error);
         alert(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
@@ -63,6 +64,18 @@ export default function SignUpPage() {
       setIsLoading(false);
     }
   };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
+  const handleGithubSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "github",
+    });
+  }
 
   return (
     <div className="min-h-screen bg-[#f0f5f0] flex flex-col items-center justify-center px-4 py-10">
@@ -200,13 +213,11 @@ export default function SignUpPage() {
 
             <Button
               type="button"
-            //   variant="bordered"
-              className="w-full text-xs"
-              onPress={() => {
-                // Add Better Auth Google sign-in
-              }}
+              //   variant="bordered"
+              className="w-full text-xs bg-white text-black border border-gray-200"
+              onClick={handleGoogleSignIn}
             >
-              <span className="font-bold text-base text-blue-500">
+              <span className="font-bold">
                 G
               </span>
               Google দিয়ে চালিয়ে যান
@@ -214,11 +225,9 @@ export default function SignUpPage() {
 
             <Button
               type="button"
-            //   variant="bordered"
-              className="w-full text-xs"
-              onPress={() => {
-                // Add Better Auth GitHub sign-in
-              }}
+              //   variant="bordered"
+              className="w-full text-xs bg-white text-black border border-gray-200"
+              onClick={handleGithubSignIn}
             >
               <Github size={17} />
               GitHub দিয়ে চালিয়ে যান
